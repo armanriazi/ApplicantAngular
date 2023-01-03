@@ -1,0 +1,107 @@
+<mat-card #matCard="matCard">
+  <div fxLayout="row" fxLayout.xs="column" fxFlex>
+    <div fxFlex="1 1 70%" fxFlexOrder fxFlexOrder.xs="1">
+
+
+      <mat-select [value]="selectedDefault" (selectionChange)="onSelectionChange($event)">
+        <mat-option *ngFor="let budget of budgetByCodeMeli" [value]="budget.bUD_ProjectID">
+          {{ budget.projectName }}
+        </mat-option>
+      </mat-select>
+    </div>
+
+    <div fxFlex="1 1 5%" fxFlexOrder fxFlexOrder.xs="1"></div>
+
+    <div fxFlex="1 1 15%" fxFlexOrder fxFlexOrder.xs="1">
+      <div class="component-theme">
+        <button mat-raised-button (click)="onSendToCartable($event)" color="primary">
+          {{'pMS_Ppp_SendToCartable' | translate}}
+        </button>
+      </div>
+    </div>
+    <div fxFlex="1 1 5%" fxFlexOrder fxFlexOrder.xs="1"></div>
+    <div fxFlex="1 1 5%" fxFlexOrder fxFlexOrder.xs="1">
+      <button mat-mini-fab (click)="restoreState($event)">
+        <mat-icon svgIcon="recovery" style="cursor:pointer;"></mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>
+<div fxLayout="row" fxLayout.xs="column" fxFlex>
+  <div fxFlex="1 1 auto" fxFlexOrder fxFlexOrder.xs="1">
+    <mat-tab-group (selectedIndexChange)="onSelectedTab($event)">
+
+      <!--<mat-tab label="SlickGrid">
+        <ng-template matTabContent>
+          <ng-container>
+          <aurelia-slickgrid grid-id="grid1"
+                             column-definitions.bind="columnDefinitions"
+                             grid-options.bind="gridOptions"
+                             dataset.bind="dataset"
+                             grid-height="400"
+                             grid-width="800">
+          </aurelia-slickgrid>
+          </ng-container>        
+        </ng-template>
+      </mat-tab>-->
+
+      <mat-tab label="{{'PlanItems'| translate}}">
+        <ng-template matTabContent>
+          <ng-container *ngIf="variablesPlanItemsProperty!=undefined;else noDataPlanItemsProperty">
+            <app-grid-dynamic [sizeColumnsToFit]="false" [pageSize]="7" [variables]="variablesDynamicPlanItemsProperty" [graphquery]="queryPlanItemsProperty" [height]="390" [colIndexId]="colIndexId"></app-grid-dynamic>
+          </ng-container>
+          <ng-template #noDataPlanItemsProperty>
+            {{'NoData' | translate}}
+          </ng-template>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'PlanTechnicalDocuments'|translate}}">
+
+        <ag-grid-angular style="width: 100%; height:420px;"
+                         class="ag-theme-balham"
+                         id="myPlanDocumentsGrid"
+                         [rowData]="myDocumentRowData"
+                         [gridOptions]="documentGridOptions"
+                         [enableCellChangeFlash]="false"
+                         [animateRows]="true"
+                         (gridReady)="onPlanDocumentsGridReady($event)"
+                         [enableColResize]="true"
+                         [enableSorting]="true"
+                         [enableFilter]="true"
+                         [enableRtl]="true"
+                         (dragStopped)="onPlanDocumentsDragStopped($event)"
+                         rowHeight="40"
+                         [pagination]="true"
+                         [paginationPageSize]="paginationPageSize"
+                         [paginationNumberFormatter]="paginationNumberFormatter"
+                         [defaultColDef]="defaultColDef">
+        </ag-grid-angular>
+
+      </mat-tab>
+      <mat-tab label="{{'PlanContractorPrice'|translate}}">
+
+        <ag-grid-angular style="width: 100%; height:420px;"
+                         class="ag-theme-balham"
+                         id="myPlanContractorPricesGrid"
+                         [rowData]="myPriceRowData"
+                         [gridOptions]="priceGridOptions"
+                         [enableCellChangeFlash]="false"
+                         [animateRows]="true"
+                         (gridReady)="onPlanContractorPricesGridReady($event)"
+                         [enableColResize]="true"
+                         [enableSorting]="true"
+                         [enableFilter]="true"
+                         [enableRtl]="true"
+                         (dragStopped)="onPlanContractorPricesDragStopped($event)"
+                         rowHeight="40"
+                         [pagination]="true"
+                         [paginationPageSize]="paginationPageSize"
+                         [paginationNumberFormatter]="paginationNumberFormatter"
+                         [defaultColDef]="defaultColDef">
+        </ag-grid-angular>
+
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+

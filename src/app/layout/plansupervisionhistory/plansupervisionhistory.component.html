@@ -1,0 +1,142 @@
+<mat-card>
+  <div fxLayout="row" fxLayout.xs="column" fxFlex>
+    <div fxFlex="0 0 5%" fxFlexOrder fxFlexOrder.xs="1">
+      <span>{{'PlanCode'|translate}}</span>
+    </div>
+
+    <div fxFlex="0 0 70%" fxFlexOrder fxFlexOrder.xs="1">
+      <mat-select (selectionChange)="onSelectionChange($event)" [value]="selectedDefault">
+        <mat-option *ngFor="let budget of budgetByCodeMeli" [value]="budget.bUD_ProjectID">
+          {{ budget.projectName }}
+        </mat-option>
+      </mat-select>
+    </div>
+  </div>
+</mat-card>
+<mat-card>
+  <div fxLayout="row" fxLayout.xs="column" fxFlex>
+    <div fxFlex="0 0 10%" fxFlexOrder fxFlexOrder.xs="1">
+      <span>{{'BUD_ProjectCode'|translate}}</span>
+    </div>
+    <div fxFlex="0 0 auto" fxFlexOrder fxFlexOrder.xs="1">
+      <input matInput readonly value="{{inputBUD_ProjectCode}}" />
+    </div>
+
+
+    <div fxFlex="0 0 10%" fxFlexOrder fxFlexOrder.xs="1">
+      <span>{{'BUD_ProjectApproveDate'|translate}}</span>
+    </div>
+    <div fxFlex="0 0 auto" fxFlexOrder fxFlexOrder.xs="1">
+      <div *ngIf="inputBUD_ProjectApproveDate!=undefined && inputBUD_ProjectApproveDate.trim().length > 7 ;else elseDate">
+        <input matInput readonly value="{{inputBUD_ProjectApproveDate}}" placeholder="-" />
+      </div>
+      <ng-template #elseDate>
+        <input matInput readonly value="-" />
+      </ng-template>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayout.xs="column" fxFlex>
+    <div fxFlex="0 0 10%" fxFlexOrder fxFlexOrder.xs="1">
+      <span>{{'BUD_ProjectAddress'|translate}}</span>
+    </div>
+    <div fxFlex="1 0 49%" fxFlexOrder fxFlexOrder.xs="1">
+      <input matInput readonly value="{{inputBUD_ProjectAddress}}" />
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayout.xs="column" fxFlex>
+    <div fxFlex="0 0 10%" fxFlexOrder fxFlexOrder.xs="1">
+      <span>{{'BUD_ProjectName'|translate}}</span>
+    </div>
+    <div fxFlex="1 1 49%" fxFlexOrder fxFlexOrder.xs="1">
+      <input matInput readonly value="{{inputBUD_ProjectName}}" />
+    </div>
+  </div>
+</mat-card>
+
+
+<div fxLayout="row" fxLayout.xs="column" fxFlex fxFlexOrder>
+  <mat-tab-group mat-stretch-tabs class="stretched-tabs" fxFlex="1 1 auto" fxFlexOrder.xs="1" (selectedIndexChange)="onSelectedTab($event)">
+    <mat-tab label="{{'TechnicalProperty'| translate}}">
+      <ng-template matTabContent>
+        <ng-container *ngIf="variablesTechnicalProperty!=undefined;else noDataTechnicalProperty">
+          <app-grid-dynamic [sizeColumnsToFit]="true" [pageSize]="5" [variables]="variablesDynamicTechnicalProperty" [graphquery]="queryTechnicalProperty" [height]="350" [colIndexId]="colIndexId"></app-grid-dynamic>
+        </ng-container>
+        <ng-template #noDataTechnicalProperty>
+          {{'NoData' | translate}}
+        </ng-template>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="{{'Options'|translate}}">
+      <ng-template matTabContent>
+        <ng-container *ngIf="variablesOptions!=undefined;else noDataOptions">
+          <app-grid-dynamic [sizeColumnsToFit]="false" [pageSize]="5" [variables]="variablesDynamicOptions" [graphquery]="queryOptions" [height]="350" [colIndexId]="colIndexId"></app-grid-dynamic>
+        </ng-container>
+        <ng-template #noDataOptions>
+          {{'NoData' | translate}}
+        </ng-template>
+      </ng-template>
+    </mat-tab>
+    <!--<mat-tab label="{{'ApprovedBudget'|translate}}">
+      <ng-template matTabContent>
+        <ng-container *ngIf="variablesApprovedBudget!=undefined;else noDataApprovedBudget">
+          <app-grid-dynamic [sizeColumnsToFit]="false" [pageSize]="5" [variables]="variablesDynamicApprovedBudget" [graphquery]="queryApprovedBudget" [height]="350" [colIndexId]="colIndexId"></app-grid-dynamic>
+        </ng-container>
+        <ng-template #noDataApprovedBudget>
+          {{'NoData' | translate}}
+        </ng-template>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="{{'Contract'|translate}}">
+      <ng-template matTabContent>
+        <ng-container *ngIf="variablesContract!=undefined;else noDataContract">
+          <app-grid-dynamic [sizeColumnsToFit]="false" [pageSize]="5" [variables]="variablesDynamicContract" [graphquery]="queryContract" [height]="350" [colIndexId]="colIndexId"></app-grid-dynamic>
+        </ng-container>
+        <ng-template #noDataContract>
+          {{'NoData' | translate}}
+        </ng-template>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="{{'Agenda'|translate}}">
+      <ng-template matTabContent>
+        <ng-container *ngIf="variablesAgenda!=undefined;else noDataAgenda">
+          <app-grid-dynamic [sizeColumnsToFit]="false" [pageSize]="5" [variables]="variablesDynamicAgenda" [graphquery]="queryAgenda" [height]="350" [colIndexId]="colIndexId"></app-grid-dynamic>
+        </ng-container>
+        <ng-template #noDataAgenda>
+          {{'NoData' | translate}}
+        </ng-template>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="{{'ExecutionAgents'|translate}}">
+      <ng-template matTabContent>
+        <ng-container *ngIf="variablesExecutionAgents!=undefined;else noDataExecutionAgents">
+          <app-grid-dynamic [sizeColumnsToFit]="false" [pageSize]="5" [variables]="variablesDynamicExecutionAgents" [graphquery]="queryExecutionAgents" [height]="350" [colIndexId]="colIndexId"></app-grid-dynamic>
+        </ng-container>
+        <ng-template #noDataExecutionAgents>
+          {{'NoData' | translate}}
+        </ng-template>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="{{'SupervistoryHistory'|translate}}">
+      <ng-template matTabContent>
+        <ng-container *ngIf="variablesSupervistoryHistory!=undefined;else noDataSupervistoryHistory">
+          <app-grid-dynamic [sizeColumnsToFit]="false" [pageSize]="5" [variables]="variablesDynamicSupervistoryHistory" [graphquery]="querySupervistoryHistory" [height]="350" [colIndexId]="colIndexId"></app-grid-dynamic>
+        </ng-container>
+        <ng-template #noDataSupervistoryHistory>
+          {{'NoData' | translate}}
+        </ng-template>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="{{'PhysicalExtend'|translate}}">
+      <ng-template matTabContent>
+        <ng-container *ngIf="variablesPhysicalExtend!=undefined;else noDataPhysicalExtend">
+          <app-grid-dynamic [sizeColumnsToFit]="false" [pageSize]="5" [variables]="variablesDynamicPhysicalExtend" [graphquery]="queryPhysicalExtend" [height]="350" [colIndexId]="colIndexId"></app-grid-dynamic>
+        </ng-container>
+        <ng-template #noPhysicalExtend>
+          {{'NoData' | translate}}
+        </ng-template>
+      </ng-template>
+    </mat-tab>-->
+  </mat-tab-group>
+</div>

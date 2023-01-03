@@ -1,0 +1,170 @@
+<div fxLayout="column" class="contextprice" id="contextprice">
+  <mat-tab-group (selectedIndexChange)="onSelectedTab($event)">
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon svgIcon="tree" aria-label="tree" class="material-icons"></mat-icon>
+        <span>{{'Tree'| translate}}</span>
+      </ng-template>
+      <div fxLayout="column">
+        <mat-card>
+          <div fxLayout="row" fxLayout.xs="column" fxFlex>
+            <div fxFlex="0 0 30%" fxFlexOrder fxFlexOrder.xs="1">
+              <mat-select (selectionChange)="onSelectionFinancialYearsChange($event)" [value]="selectedValueOfYear">
+                <mat-option *ngFor="let financialyear of myFinancialYearsSelectListData" [value]="financialyear.aCC_FinancialYearID">
+                  {{ financialyear.aCC_FinancialYearName }}
+                </mat-option>
+              </mat-select>
+            </div>
+
+            <div fxFlex="1 1 2%" fxFlexOrder fxFlexOrder.xs="1"></div>
+
+            <div fxFlex="0 0 68%" fxFlexOrder fxFlexOrder.xs="1">
+              <mat-select (selectionChange)="onSelectionBasePriceRepertoryChange($event)" [value]="selectedValueOfBasePrice">
+                <mat-option *ngFor="let baseprice of myBasePriceRepertorySelectListData" [value]="baseprice.tBL_PrcID">
+                  {{ baseprice.tBL_PrcName }}
+                </mat-option>
+              </mat-select>
+            </div>
+
+          </div>
+        </mat-card>
+
+
+        <div fxLayout="row" fxLayout.xs="column" fxFlex>
+          <div fxFlex="1 1 32%" fxFlexOrder fxFlexOrder.xs="1" style="border: 1px solid grey;">
+            <div style="height: 400px;">
+              <tree-root #tree [nodes]="nodes" [options]="options" [focused]="true"
+                         (activate)="onEventActivate($event)"></tree-root>
+            </div>
+          </div>
+          <div fxFlex="1 1 68%" fxFlexOrder fxFlexOrder.xs="1" style="border: 1px solid grey;">
+
+            <div fxLayout="row" fxLayout.xs="column" class="table" ngClass.xs="table-mobile">
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"> <span [translate]="'tBL_BprMaterialPrice'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprMaterialPrice}}" readonly matInput /></div>
+              </div>
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"><span [translate]="'tBL_BprMachineryPrice'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprMachineryPrice}}" readonly matInput /></div>
+              </div>
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"><span [translate]="'tBL_BprDeparePrice1'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprDeparePrice1}}" readonly matInput /></div>
+              </div>
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"> <span [translate]="'tBL_BprDeparePrice2'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprDeparePrice2}}" readonly matInput /></div>
+              </div>
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"><span [translate]="'tBL_BprDeparePrice3'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprDeparePrice3}}" readonly matInput /></div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="row" fxLayout.xs="column" class="table" ngClass.xs="table-mobile">
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"> <span [translate]="'tBL_BprPrice'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprPrice}}" readonly matInput /></div>
+              </div>
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"><span [translate]="'tBL_BprQuantity'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprQuantity}}" readonly matInput /></div>
+              </div>
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"><span [translate]="'tBL_BprPayPrice'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprPayPrice}}" readonly matInput /></div>
+              </div>
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"> <span [translate]="'tBL_BprNote'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprNote}}" readonly matInput /></div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>            
+            <div fxLayout="row" fxLayout.xs="column" class="table" ngClass.xs="table-mobile">
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"> <span [translate]="'tBL_BprTransportCoefficient'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprTransportCoefficient}}" readonly matInput /></div>
+              </div>
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"> <span [translate]="'tBL_BprWarehouseCoding'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprWarehouseCoding}}" readonly matInput /></div>
+              </div>
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"><span [translate]="'tBL_BprDisposePrice'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprDisposePrice}}" readonly matInput /></div>
+              </div>
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"><span [translate]="'tBL_BprMachineryDeparePrice'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprMachineryDeparePrice}}" readonly matInput /></div>
+              </div>
+              <div fxLayout="column" fxLayout.xs="row" class="row" fxLayoutAlign="space-around center" fxLayoutGap="8px" fxLayoutGap.xs="0">
+                <div class="cell"><span [translate]="'tBL_BprPayDeparePrice'"></span></div>
+                <div fxFlex class="cell"><input value="{{inputTBL_BprPayDeparePrice}}" readonly matInput /></div>
+              </div>
+            </div>
+
+            <mat-card>
+              <mat-card-content>
+                <ag-grid-angular style="height:172px;"
+                                 class="ag-theme-balham"
+                                 id="myBasePriceProjectReportItemsGrid"
+                                 [rowData]="myBasePriceProjectReportItemsRowData"
+                                 [columnDefs]="myBasePriceProjectReportItemsColumnDefs"
+                                 [enableCellChangeFlash]="true"
+                                 [animateRows]="true"
+                                 (gridReady)="onBasePriceProjectReportItemsGridReady($event)"
+                                 [enableColResize]="true"
+                                 [enableSorting]="true"
+                                 [enableFilter]="true"
+                                 [enableRtl]="true"
+                                 rowHeight="27"
+                                 [pagination]="true"
+                                 [paginationPageSize]="paginationPageSize"
+                                 [paginationNumberFormatter]="paginationNumberFormatter"
+                                 [defaultColDef]="defaultColDef">
+                </ag-grid-angular>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon svgIcon="table" aria-label="table" class="material-icons"></mat-icon>
+        <span>{{'Table'| translate}}</span>
+      </ng-template>
+      <mat-card>
+        <div fxLayout="row" fxLayout.xs="column" fxFlex>
+          <div fxFlex="0 0 30%" fxFlexOrder fxFlexOrder.xs="1">
+            <mat-select placeholder="" (selectionChange)="onSelectionFinancialYearsChangeTable($event)" [value]="selectedValueOfYearTable">
+              <mat-option *ngFor="let financialyearTable of myFinancialYearsSelectListDataTable" [value]="financialyearTable.aCC_FinancialYearID">
+                {{ financialyearTable.aCC_FinancialYearName }}
+              </mat-option>
+            </mat-select>
+          </div>
+          <div fxFlex="1 1 2%" fxFlexOrder fxFlexOrder.xs="1"></div>
+          <div fxFlex="0 0 68%" fxFlexOrder fxFlexOrder.xs="1">
+            <mat-select placeholder="" (selectionChange)="onSelectionBasePriceRepertoryChangeTable($event)" [value]="selectedValueOfBasePriceTable">
+              <mat-option *ngFor="let basepriceTable of myBasePriceRepertorySelectListDataTable" [value]="basepriceTable.tBL_PrcID">
+                {{ basepriceTable.tBL_PrcName }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card>
+        <ng-container *ngIf="variablesPriceContextTableView!=undefined;else noDataPriceContext">
+          <app-grid-dynamic [sizeColumnsToFit]="false" [pageSize]="7" [variables]="variablesDynamic" [graphquery]="queryPriceContextTableView" [height]="365" [colIndexId]="colIndexId"></app-grid-dynamic>
+        </ng-container>
+        <ng-template #noDataPriceContext>
+          {{'NoData' | translate}}
+        </ng-template>
+      </mat-card>
+    </mat-tab>
+  </mat-tab-group>
+</div>

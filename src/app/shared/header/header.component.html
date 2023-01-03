@@ -1,0 +1,38 @@
+<mat-toolbar color="primary">
+  <div fxFlex="1 0 auto" mat-button [matMenuTriggerFor]="indexmenu">
+    <img src="./assets/img/logo/logo.png" class="angular-logo">
+  </div>
+  <div fxFlex="1 1 auto" fxHide.xs="true">
+    <div [translate]="'Co'"></div>
+  </div>
+  <div fxFlex="5 1 auto" fxHide.xs="true">
+    <div [translate]="'PortalForHumanResourceApplicants'"></div>    
+  </div>
+  <div fxFlex="1 1 auto">
+    <app-timer></app-timer>
+  </div>
+  <div fxFlex="1 1 auto">
+    <!--<div [translate]="'Clock'"></div>-->
+    <mat-slide-toggle [checked]="isThemeDark | async" (change)="toggleDarkTheme($event.checked)"><div [translate]="'ChangeTheme'"></div></mat-slide-toggle>
+  </div>
+
+</mat-toolbar>
+
+<mat-menu #indexmenu="matMenu">
+  <button mat-menu-item [routerLink]="['/dashboard']">
+    <mat-icon svgIcon="planinformation"></mat-icon>
+    <span [translate]="'PlanInformation'"></span>
+  </button>
+  <button mat-menu-item [routerLink]="['/dashboard/contextprice']">
+    <mat-icon svgIcon="contextprice"></mat-icon>
+    <span [translate]="'ContextPrice'"></span>
+  </button>
+  <button mat-menu-item [routerLink]="['/dashboard/planhistory']">
+    <mat-icon svgIcon="plansupervisionhistory"></mat-icon>
+    <span [translate]="'SupervisoryHistory'"></span>
+  </button>
+  <button mat-menu-item (click)="onLogout()">
+    <mat-icon svgIcon="logout"></mat-icon>
+    <span [translate]="'Logout'"></span>
+  </button>
+</mat-menu>

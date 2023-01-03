@@ -1,0 +1,44 @@
+.mat-card {
+  
+  height: 50px;
+}
+::ng-deep .mat-select-content {
+  font-size: 0.8em;
+}
+::ng-deep .mat-select {
+  overflow: hidden;
+  border-style:solid;
+}::ng-deep .mat-form-field-infix {
+ width:100%;
+}
+::ng-deep .mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-tab-list{
+  font-weight:bolder;
+}
+div[mat-card] {
+  padding: 5px;
+}
+
+ag-header-cell {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/*
+
+
+::ng-deep .ag-cell-focus {    
+  background-color:aqua;
+}
+
+
+
+table {
+  width: 100%;
+}*/

@@ -1,0 +1,51 @@
+ag-header-cell {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-mobile {
+  display: table !important;
+}
+
+.table-mobile .row {
+  display: table-row !important;
+}
+
+.table-mobile .cell {
+  display: table-cell;
+
+}
+
+div[mat-card] {
+  padding: 2px;
+}
+
+.row {
+  margin: 2px 2px 2px 2px;
+}
+
+input {
+  text-align:center;
+  width:122px;
+}
+
+.myextend-for-tabs{
+  width: 25px;
+  height: 25px;
+  margin: 10px 0px 0px 0px;
+}
+
+/*mytab-tabTree{
+  @extend .myextend-for-tabs;
+  content: url("data:image/svg+xml;utf8;base64,");
+}
+
+.mytab .mytab-tabTable{
+  @extend .myextend-for-tabs;
+  content: url("data:image/svg+xml;utf8;base64,");
+}*/
+
+
+

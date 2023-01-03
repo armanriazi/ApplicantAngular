@@ -1,0 +1,114 @@
+
+@import './my-theme.scss';
+@import '~devextreme/dist/css/dx.material.teal.light.css';
+@import "~ag-grid/dist/styles/ag-grid.css";
+@import "~ag-grid/dist/styles/ag-theme-balham.css";
+@import "~@progress/kendo-theme-bootstrap/dist/all.css";
+@import '~angular-tree-component/dist/angular-tree-component.css';
+
+/*@import '~devextreme/dist/css/dx.material.purple.light.css';
+@import '~devextreme/dist/css/dx.ios7.default.css';
+ @import '~devextreme/dist/css/dx.ios7.default.css';
+@import '~devextreme/dist/css/dx.win10.white.css';*/
+
+/* for example, let's change the mouse hover color */
+$cell-odd-background-color: lightyellow;
+$row-mouse-hover-color: lightgreen;
+
+/* make sure to add the @import the SlickGrid Bootstrap Theme AFTER the variables changes */
+@import '../node_modules/aurelia-slickgrid/dist/styles/sass/slickgrid-theme-bootstrap.scss';
+
+@font-face {
+  font-family: 'B Nazanin 22px', 'Nazanin', 'B Zar';
+  src: url("./assets/fonts/BNazanin.ttf") format('truetype'),url("./assets/fonts/BZar.ttf") format('truetype');
+}
+
+* {
+  font-family: 'B Nazanin 22px', 'Nazanin', 'B Zar';
+}
+
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+
+.material-icons {
+  direction: rtl;
+}
+
+/*.ag-cell{
+  display:inline-flex;
+}
+.ag-cell-focus, .ag-cell-no-focus {
+  border: none !important;
+}
+
+.no-border.ag-cell:focus {
+  border: none !important;
+  outline: none;
+}
+.cell-wrap-text {
+  white-space: normal !important;
+}
+.mycell-Row {
+  font-weight:bold;
+  text-align: center;
+}*/
+
+.mat-tab-label.mat-tab-label-active {  
+  font-weight: bold;
+}
+
+.tree-root .angular-tree-component-rtl .tree-children {
+  padding-right: 15px;
+  padding-left:0;
+}
+
+
+/*.node-content-wrapper, .tree-children {
+  position: relative;
+}
+
+.node-content-wrapper::before, .tree-children::after {  
+  content: "■";
+  position: absolute;
+   font-size: x-small;
+}
+
+.node-content-wrapper::before {
+  border-bottom: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  height: 28px;
+  top: -17px;
+  width: 20px;
+  left: -28px;
+}
+
+.tree-node-level-1 > tree-node-wrapper > .node-wrapper > .node-content-wrapper::before {
+  display: none;
+}
+
+.tree-node-leaf > .node-wrapper > .node-content-wrapper::before {
+  width: 25px;
+}
+
+.tree-children::after {
+  border-left: 1px solid lightgrey;
+  height: 100%;
+  top: -15px;
+  left: -15px;
+}
+
+tree-node:last-child > .tree-node > .tree-children::after {
+  border-left: none;
+}
+
+.toggle-children {
+  z-index: 1;
+}*/

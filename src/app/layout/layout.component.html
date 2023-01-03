@@ -1,0 +1,150 @@
+<div [ngClass]="{'dark-theme': isThemeDark | async}">
+  <div class="mat-app-background">
+
+    <mat-sidenav-container autosize>
+      <mat-sidenav #sidenav mode="side" opened>
+        <mat-toolbar color="accent">
+          <button mat-icon-button class="mat-icon-button sidenav-toggle-button" (click)="showFilterAll=!showFilterAll">
+            <mat-icon svgIcon="menu" aria-label="Menu" class="material-icons"></mat-icon>
+          </button>
+          <span class="toolbar-filler"></span>
+        </mat-toolbar>
+
+        <mat-nav-list>
+          <div [hidden]="!showFilterAll">
+            <mat-list-item [matMenuTriggerFor]="notificationMenuPlanInformation">
+
+              <mat-icon mat-icon-button svgIcon="planinformation" class="material-icons mat-icon-button"></mat-icon>
+
+              <ng-template #notificationMenuPlanInformationTpl>
+                <button mat-menu-item class="sidenav-link" [routerLink]="['/dashboard']">
+                  <span [translate]="'PlanInformation'"></span>
+                </button>
+              </ng-template>
+              <mat-menu #notificationMenuPlanInformation="matMenu" overlapTrigger="true">
+                <ng-container *ngTemplateOutlet="notificationMenuPlanInformationTpl"></ng-container>
+              </mat-menu>
+            </mat-list-item>
+          </div>
+          <div [hidden]="showFilterAll">
+            <mat-list-item (click)="$event.stopPropagation()">
+              <button mat-icon-button class="mat-icon-button">
+                <mat-icon svgIcon="planinformation" class="material-icons"></mat-icon>
+              </button>
+              <button mat-menu-item class="sidenav-link" [routerLink]="['/dashboard']">
+                <span [translate]="'PlanInformation'"></span>
+              </button>
+            </mat-list-item>
+          </div>
+
+
+
+          <div [hidden]="!showFilterAll">
+            <mat-list-item [matMenuTriggerFor]="notificationMenuContextPrice" (click)="$event.stopPropagation()">
+              <mat-icon mat-icon-button svgIcon="contextprice" class="material-icons mat-icon-button"></mat-icon>
+              <div [hidden]="showFilterAll">
+                <button mat-menu-item class="sidenav-link" [routerLink]="['/dashboard/contextprice']">
+                  <span [translate]="'ContextPrice'"></span>
+                </button>
+              </div>
+              <ng-template #notificationMenuContextPriceTpl>
+                <button mat-menu-item class="sidenav-link" [routerLink]="['/dashboard/contextprice']">
+                  <span [translate]="'ContextPrice'"></span>
+                </button>
+              </ng-template>
+              <mat-menu #notificationMenuContextPrice="matMenu" overlapTrigger="true">
+                <ng-container *ngTemplateOutlet="notificationMenuContextPriceTpl"></ng-container>
+              </mat-menu>
+            </mat-list-item>
+          </div>
+          <div [hidden]="showFilterAll">
+            <mat-list-item (click)="$event.stopPropagation()">
+              <button mat-icon-button class="mat-icon-button">
+                <mat-icon svgIcon="contextprice" class="material-icons"></mat-icon>
+              </button>
+              <button mat-menu-item class="sidenav-link" [routerLink]="['/dashboard/contextprice']">
+                <span [translate]="'ContextPrice'"></span>
+              </button>
+            </mat-list-item>
+          </div>
+
+
+
+
+          <div [hidden]="!showFilterAll">
+            <mat-list-item [matMenuTriggerFor]="notificationMenuPlanSuperVisionHistory" (click)="$event.stopPropagation()">
+              <mat-icon mat-icon-button svgIcon="plansupervisionhistory" class="material-icons mat-icon-button"></mat-icon>
+              <div [hidden]="showFilterAll">
+                <button mat-menu-item class="sidenav-link" [routerLink]="['/dashboard/planhistory']">
+                  <span [translate]="'SupervisoryHistory'"></span>
+                </button>
+              </div>
+              <ng-template #notificationMenuPlanSuperVisionHistoryTpl>
+                <button mat-menu-item class="sidenav-link" [routerLink]="['/dashboard/planhistory']">
+                  <span [translate]="'SupervisoryHistory'"></span>
+                </button>
+              </ng-template>
+              <mat-menu #notificationMenuPlanSuperVisionHistory="matMenu" overlapTrigger="true">
+                <ng-container *ngTemplateOutlet="notificationMenuPlanSuperVisionHistoryTpl"></ng-container>
+              </mat-menu>
+            </mat-list-item>
+          </div>
+          <div [hidden]="showFilterAll">
+            <mat-list-item (click)="$event.stopPropagation()">
+              <button mat-icon-button class="mat-icon-button">
+                <mat-icon svgIcon="plansupervisionhistory" class="material-icons"></mat-icon>
+              </button>
+              <button mat-menu-item class="sidenav-link" [routerLink]="['/dashboard/planhistory']">
+                <span [translate]="'SupervisoryHistory'"></span>
+              </button>
+            </mat-list-item>
+          </div>
+
+        </mat-nav-list>
+
+
+
+        <div [hidden]="!showFilterAll">
+          <mat-list-item [matMenuTriggerFor]="notificationMenuGridPlanInformation">
+
+            <mat-icon mat-icon-button svgIcon="planinformation" class="material-icons mat-icon-button"></mat-icon>
+
+            <ng-template #notificationMenuGridPlanInformationTpl>
+              <button mat-menu-item class="sidenav-link" [routerLink]="['/dashboard/gridplaninformation']">
+                <span [translate]="'planinformation'"></span>
+              </button>
+            </ng-template>
+            <mat-menu #notificationMenuGridPlanInformation="matMenu" overlapTrigger="true">
+              <ng-container *ngTemplateOutlet="notificationMenuGridPlanInformationTpl"></ng-container>
+            </mat-menu>
+          </mat-list-item>
+        </div>
+        <div [hidden]="showFilterAll">
+          <mat-list-item (click)="$event.stopPropagation()">
+            <button mat-icon-button class="mat-icon-button">
+              <mat-icon svgIcon="planinformation" class="material-icons"></mat-icon>
+            </button>
+            <button mat-menu-item class="sidenav-link" [routerLink]="['/dashboard/gridplaninformation']">
+              <span [translate]="'planinformation'"></span>
+            </button>
+          </mat-list-item>
+        </div>
+
+      </mat-sidenav>
+
+      <div fxLayout="row" fxLayout.xs="column" fxFlex>
+        <div fxFlex="1 1 auto" fxFlexOrder fxFlexOrder.xs="1">
+          <app-header></app-header>
+        </div>
+      </div>
+      <!--*<div fxLayout="row" fxLayout.xs="column" fxFlex>
+        <div fxFlex="1 1 auto" fxFlexOrder fxFlexOrder.xs="1" style="background-color:#3f51b5;color:white;">
+          <span>{{currentCaptionRouter}}</span>
+        </div>
+      </div>-->
+      <router-outlet (activate)='onActivate($event)'></router-outlet>
+
+    </mat-sidenav-container>
+    </div> <footer class="footer"><span [translate]="'footer'"></span></footer>
+  </div>
+ 

@@ -1,0 +1,238 @@
+<mat-card #matCard="matCard">
+  <div fxLayout="row" fxLayout.xs="column" fxFlex>
+    <div fxFlex="1 1 72%" fxFlexOrder fxFlexOrder.xs="1">
+
+      <mat-select [value]="selectedDefault" (selectionChange)="onSelectionChange($event)">
+        <mat-option *ngFor="let budget of budgetByCodeMeli" [value]="budget.bUD_ProjectID">
+          {{ budget.projectName }}
+        </mat-option>
+      </mat-select>
+    </div>
+
+    <div fxFlex="1 1 3%" fxFlexOrder fxFlexOrder.xs="1"></div>
+
+    <div fxFlex="1 1 13%" fxFlexOrder fxFlexOrder.xs="1">
+      <div class="component-theme">
+        <button mat-raised-button (click)="onSendToCartable($event)" color="primary" style="height:30px;">
+          {{'pMS_Ppp_SendToCartable' | translate}}
+        </button>
+      </div>
+    </div>
+    <div fxFlex="1 1 4%" fxFlexOrder fxFlexOrder.xs="1"></div>
+      <div fxFlex="1 1 14%" fxFlexOrder fxFlexOrder.xs="1">
+        <mat-select placeholder="{{'SelectOperation'|translate}}">
+          <mat-option (click)="saveGridSettingsStateWithServer()">
+            <mat-icon svgIcon="save" color="warn" ></mat-icon>
+            <span [translate]="'SaveState'"></span>
+          </mat-option>
+          <mat-option  (click)="loadGridSettingsFromServer()">
+            <mat-icon svgIcon="recovery" color="warn"></mat-icon>
+            <span [translate]="'RecoveryState'"></span>
+          </mat-option>          
+          <mat-option (click)="loadGridSettingsFromInitialize()">
+            <mat-icon svgIcon="recoverysettings" color="warn"></mat-icon>
+            <span [translate]="'RecoverySettingsManufacture'"></span>
+          </mat-option>
+        </mat-select>
+      </div>
+    </div>
+</mat-card>
+<div fxLayout="row" fxLayout.xs="column" fxFlex>
+  <div fxFlex="1 1 auto" fxFlexOrder fxFlexOrder.xs="1">
+    <mat-tab-group (selectedIndexChange)="onSelectedTab($event)">
+
+      <mat-tab label="{{'PlanTechnicalDocuments'|translate}}">
+
+        <!--<kendo-grid [data]="gridData" [height]="410"
+                [pageSize]="gridPlanInformationDocumentSettings.state.pageSize"
+                [skip]="gridPlanInformationDocumentSettings.state.skip"
+                [sort]="gridPlanInformationDocumentSettings.state.sort"
+                [filter]="gridPlanInformationDocumentSettings.state.filter"
+                [sortable]="true"
+                [pageable]="true"
+                [filterable]="true"
+                filterable="menu"
+                selectable="true"
+                (datagridPlanInformationDocumentSettings.stateChange)="dataKendogridPlanInformationDocumentSettings.stateChange($event)"
+                (pageChange)="pageKednoDocumentChange($event)">
+    <kendo-grid-column field="ProductID" title="ID" width="40">
+    </kendo-grid-column>
+    <kendo-grid-column field="ProductName" title="Name" width="250">
+    </kendo-grid-column>
+    <kendo-grid-column field="Category.CategoryName" title="Category">
+    </kendo-grid-column>
+    <kendo-grid-column field="UnitPrice" title="Price" width="80">
+    </kendo-grid-column>
+    <kendo-grid-column field="UnitsInStock" title="In stock" width="80">
+    </kendo-grid-column>
+    <kendo-grid-column field="Discontinued" title="Discontinued" width="120">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input type="checkbox" [checked]="dataItem.Discontinued" disabled />
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>-->
+        <ng-template matTabContent>
+          <ng-container *ngIf="gridPlanInformationDocumentSettingsInView!=undefined;
+                               else noDataKendoDocumentProperty">
+            <kendo-grid #grid
+                        [data]="gridPlanInformationDocumentSettingsInView.gridData"
+                        [loading]="kendoLoading"                    
+                        [skip]="gridPlanInformationDocumentSettingsInView.state.skip"
+                        [pageSize]="gridPlanInformationDocumentSettingsInView.state.take"
+                        [filter]="gridPlanInformationDocumentSettingsInView.state.filter"
+                        [pageable]="true"
+                        [reorderable]="reorderable"
+                        [groupable]="groupable"
+                        selectable="selectable"
+                        [resizable]="resizable"
+                        [filterable]="filterable"                           
+                        filterable="menu"
+                        [style.height.%]="100"
+                        (filterChange)="filterChange($event)"
+                        (pageChange)="pageKednoDocumentChange($event)"                       
+                        [group]="gridPlanInformationDocumentSettingsInView.state.group"
+                        (groupChange)="groupChange($event)"
+                        [sortable]="{
+                                  allowUnsort: allowUnsort,
+                                  mode: multiple ? 'multiple' : 'single'
+                                 }"
+                        [sort]="gridPlanInformationDocumentSettingsInView.state.sort"
+                        (sortChange)="sortChange($event)"
+                        (dataStateChange)="dataStateChange($event)"
+                        (columnReorder)="onReorder($event)"
+                        (columnResize)="onResize($event)"
+                        (columnVisibilityChange)="onVisibilityChange($event)">
+           
+
+              <kendo-grid-column 
+                                 title="#"
+                                 *ngIf="gridPlanInformationDocumentSettingsInView.columnsConfig.length>0"
+                                 [sortable]="false"
+                                 [filterable]="false"
+                                 [groupable]="false"
+                                 [resizable]="false"
+                                 [hidden]="false"
+                                 selectable="false"
+                                 [width]="26"
+                                 [headerStyle]="{'text-align':'center'}"
+                                 [style]="{'text-align':'center'}">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                  {{rowIndex+1}}
+                </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column *ngFor="let col of gridPlanInformationDocumentSettingsInView.columnsConfig"
+                                 [field]="col.field"
+                                 [title]="col.title"
+                                 [hidden]="col.hidden"
+                                 [width]="col._width" 
+                                 [filter]="col.filter"
+                                 [format]="col.format"
+                                 [reorderable]="reorderable"
+                                 [groupable]="groupable"
+                                 [resizable]="resizable"
+                                 [filterable]="filterable"
+                                 [sortable]="sortable"
+                                 selectable="selectable"
+                                 media="md"
+                                 >
+              </kendo-grid-column>
+              <kendo-grid-column  title="{{commands}}" width="80"
+                                 *ngIf="gridPlanInformationDocumentSettingsInView.columnsConfig.length>0"
+                                 [headerStyle]="{'text-align':'center'}"
+                                 [style]="{'text-align':'center'}"
+                                 [resizable]="true"
+                                 [hidden]="false"
+                                 [groupable]="false"
+                                 [sortable]="false"
+                                 [filterable]="false"
+                                 selectable="true">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <button kendoButton *ngIf="!opened" (click)="dialogKendoOpen(dataItem.pMS_PaID)" [icon]="'attachment'"></button>
+                </ng-template>
+              </kendo-grid-column>
+
+              <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">
+                <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+                <kendo-slider [showButtons]="false"
+                              [tickPlacement]="'none'"
+                              [max]="totalPages"
+                              [min]="1"
+                              (valueChange)="sliderChange($event)"
+                              [value]="currentPage">
+                </kendo-slider>
+                <kendo-pager-info></kendo-pager-info>
+                <kendo-pager-next-buttons></kendo-pager-next-buttons>
+                <kendo-pager-page-sizes [pageSizes]="pageSizes"></kendo-pager-page-sizes>
+              </ng-template>
+            </kendo-grid>
+
+            <kendo-window [top]="10" [left]="10" [minWidth]="300" [minHeight]="125"
+                                        [keepContent]="true"
+                                        title="{{Information}}" *ngIf="opened" (close)="dialogKendoClose('window')"
+                                        [resizable]="true">
+              <kendo-grid [data]="myDocumentKendoDialogRowData | async" 
+                          [pageSize]="pageSize"
+                          [skip]="skip"
+                          [sortable]="true"
+                          [sort]="sort"
+                          [pageable]="true"
+                          selectable="true">
+                <kendo-grid-column width="20" title="{{row}}"
+                                   [headerStyle]="{'text-align':'center'}"
+                                   [style]="{'background': 'linear-gradient(mediumpurple,lightblue)','text-align':'center'}">
+                  <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    {{rowIndex+1}}
+                  </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="documentID" title="{{documentID}}" width="100" [sortable]="true" [hidden]="true">
+                </kendo-grid-column>
+                <kendo-grid-column field="documentCode" title="{{documentCode}}" width="100" [sortable]="true" [hidden]="true">
+                </kendo-grid-column>
+                <kendo-grid-column field="documentName" title="{{documentName}}" width="80" [sortable]="true">
+                </kendo-grid-column>
+                <kendo-grid-column field="documentFileType" title="{{documentFileType}}" width="80" [sortable]="true">
+                </kendo-grid-column>
+                <kendo-grid-column field="documentNote" title="{{documentNote}}" width="80" [sortable]="true" [hidden]="true">
+                </kendo-grid-column>
+                <kendo-grid-column field="fileTypeId" title="{{fileTypeId}}" width="80" [sortable]="true" [hidden]="true">
+                </kendo-grid-column>
+              </kendo-grid>
+            </kendo-window>
+          </ng-container>
+          <ng-template #noDataKendoDocumentProperty>
+            {{'NoData' | translate}}
+          </ng-template>
+        </ng-template>
+
+      
+
+        <!-- <kendo-dialog title="" *ngIf="opened" (close)="dialogKendoClose('cancel')" [minWidth]="250" [width]="600">
+    <kendo-dialog-actions>
+      <button kendoButton *ngIf="!opened" (click)="dialogKendoClose('button closed')" [icon]="'close0'"></button>
+    </kendo-dialog-actions>
+  </kendo-dialog>-->
+       
+      </mat-tab>
+
+      <mat-tab label="{{'PlanTechnicalDocuments'|translate}}">
+        <!--<dx-data-grid [dataSource]="gridData">
+          <dxi-column dataField="ProductID" caption="ProductID"></dxi-column>
+          <dxi-column dataField="ProductName" caption="ProductName" [visible]="true"></dxi-column>
+          <dxi-column dataField="Category.CategoryName" caption="CategoryName" [visible]="true"></dxi-column>
+          <dxi-column dataField="UnitPrice" caption="UnitPrice" [visible]="true"></dxi-column>
+          <dxi-column dataField="UnitsInStock" caption="UnitsInStock" [visible]="true"></dxi-column>
+        </dx-data-grid>-->
+        <dx-data-grid [dataSource]="myDocumentDevExtremeRowData | async">
+          <dxi-column dataField="pMS_PdtName" caption="{{pMS_PdtName}}"></dxi-column>
+          <dxi-column dataField="pMS_PaDescription" caption="{{pMS_PaDescription}}" [visible]="true"></dxi-column>
+          <dxi-column dataField="pMS_PaDate" caption="{{pMS_PaDate}}" [visible]="true"></dxi-column>
+        </dx-data-grid>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+
+
+
+

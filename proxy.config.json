@@ -1,0 +1,10 @@
+{
+  "/graphql": {
+    "target": "http://172.18.4.19:8086",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  } 
+}
+
+

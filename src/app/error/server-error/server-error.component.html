@@ -1,0 +1,20 @@
+﻿<div class="code">
+    500
+</div>
+
+<div class="title">
+   مشکل ارتباطی
+</div>
+
+<div class="description">
+    ممکن از مشکل از وضعیت ارتباطات داخلی باشد لطفا چند دقیقه دیگر مراجعه فرمائید
+    <div *ngIf="model.showDetails"
+         class="details">
+        {{params | json}}
+    </div>
+</div>
+
+<a class="link"
+   [routerLink]="['']">
+    گزارش مشکل پیش آمده
+</a>

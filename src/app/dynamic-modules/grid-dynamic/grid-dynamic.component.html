@@ -1,0 +1,34 @@
+<div class="grid-section-state">
+  <!--<button (click)="printState()">Print State</button>-->
+  <button mat-mini-fab (click)="saveState()">
+    <mat-icon svgIcon="save"  style="cursor:pointer;"></mat-icon>
+  </button>
+  <button mat-mini-fab (click)="restoreState()">
+    <mat-icon svgIcon="recovery" style="cursor:pointer;"></mat-icon>
+  </button>
+  <button mat-mini-fab (click)="resetState()">
+    <mat-icon svgIcon="recoverysettings"  style="cursor:pointer;"></mat-icon>
+  </button>
+</div>
+<ag-grid-angular #agGrid
+                 class="ag-theme-balham" style="width: 100%; height: 100%;"
+                 [style.height]="Height"
+                 [id]="id"
+                 [rowData]="rowData"
+                 [columnDefs]="columnDefs"
+                 (columnResized)="onColumnResized($event)"
+                 [enableCellChangeFlash]="true"
+                 (gridReady)="gridReady($event)"                 
+                 (dragStopped)="dragStopped($event)"
+                 [animateRows]="true"
+                 rowSelection="single"
+                 [enableColResize]="true"
+                 [enableSorting]="true"
+                 [enableFilter]="true"
+                 [enableRtl]="true"
+                 rowHeight="35"
+                 [pagination]="true"
+                 [paginationPageSize]="paginationPageSize"
+                 [paginationNumberFormatter]="paginationNumberFormatter"
+                 [defaultColDef]="defaultColDef">
+</ag-grid-angular>

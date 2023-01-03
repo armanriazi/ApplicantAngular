@@ -1,0 +1,50 @@
+.stretched-tabs {
+  max-width: 100%;
+  overflow:hidden;
+}
+
+::ng-deep .mat-select-content {
+  font-size: 0.8em;
+}
+
+::ng-deep .mat-select {
+  overflow: hidden;
+  border-style: solid;
+}
+
+::ng-deep .mat-form-field-infix {
+  width: 100%;
+}
+
+::ng-deep .mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-tab-list {
+  font-weight: bolder;
+}
+
+.mat-card {
+  padding-top: 20px;
+  padding-right: 15px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+}
+
+ag-header-cell {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+input {
+  width: 400px;
+  overflow-wrap: break-word;
+  border:hidden;
+  text-align:right;
+}
+/*.mat-tab-group {
+  white-space: nowrap;
+  overflow: hidden;
+}*/

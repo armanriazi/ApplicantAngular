@@ -1,0 +1,31 @@
+.mat-card {
+  
+  height: 50px;
+}
+::ng-deep .mat-select-content {
+  font-size: 0.8em;
+}
+::ng-deep .mat-select-placeholder {
+  font-size: 0.8em;
+}
+::ng-deep .mat-select {
+  overflow: hidden;
+  border-style:solid;
+}::ng-deep .mat-form-field-infix {
+ width:100%;
+}
+::ng-deep .mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-tab-list{
+  font-weight:bolder;
+}
+div[mat-card] {
+  padding: 5px;
+}
+
+::ng-deep .k-slider-horizontal {
+  margin: 0px 10px 0px 10px;
+}
+

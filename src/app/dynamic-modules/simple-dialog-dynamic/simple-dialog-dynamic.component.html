@@ -1,0 +1,36 @@
+<div mat-dialog-container>
+  <mat-toolbar *ngIf="style==1" color="accent" class="mat-elevation-z5">
+    <div *ngIf="button==-1">
+      <button mat-mini-fab [mat-dialog-close]="data" cdkFocusInitial>
+        <mat-icon svgIcon="close" (click)="onClose()" style="cursor:pointer;"></mat-icon>
+      </button>
+    </div>
+    <mat-card-header>{{title}}</mat-card-header>
+  </mat-toolbar>
+  <div class="message">
+    <p>
+      {{message}}
+    </p>
+  </div>
+  <div class="info" *ngIf="information!=''" >
+    <p>{{information}}</p>
+  </div>
+  <div style="padding: 0;margin:0;float:right">   
+    <div *ngIf="button==0">
+      <button mat-button color="primary" (click)="onOk()" tabindex="-1">{{'Ok'|translate}}</button>
+    </div>
+    <div *ngIf="button==1">
+      <button mat-button color="primary" (click)="onOk()" tabindex="-1">{{'Ok'|translate}}</button>
+      <button mat-button color="primary" (click)="onCancel()" tabindex="-1">{{'Cancel'|translate}}</button>
+    </div>
+    <div *ngIf="button==2">
+      <button mat-button color="primary" (click)="onYes()" tabindex="-1">{{'Yes'|translate}}</button>
+      <button mat-button color="primary" (click)="onNo()" tabindex="-1">{{'No'|translate}}</button>
+    </div>
+    <div *ngIf="button==3">
+      <button mat-button color="primary" (click)="onAccept()" tabindex="-1">{{'Accept'|translate}}</button>
+      <button mat-button color="primary" (click)="onReject()" tabindex="-1">{{'Reject'|translate}}</button>
+    </div>
+  </div>
+  
+</div>
